@@ -14,7 +14,8 @@ API REST para controle de finanças pessoais, permitindo registrar entradas e sa
 
 # ------------------------------------------------
 
-⚙️ Como rodar o projeto
+# ⚙️ Como rodar o projeto
+
 # Clonar repositório
 git clone <url>
 
