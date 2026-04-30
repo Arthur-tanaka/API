@@ -73,6 +73,9 @@ def saldo(request):
     
 
 class TransactionViewSet(ModelViewSet):
-    queryset = Transaction.objects.all()
+    def get_queryset(self):
+        return Transaction.objects.filter(user=self.request.user)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
     serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticated]
