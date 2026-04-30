@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from .models import Transaction
 
 class LoginView(APIView):
     def post(self, request):
@@ -14,3 +15,4 @@ class LoginView(APIView):
             return Response({"msg": "Login OK"}, status=status.HTTP_200_OK)
         
         return Response({"error": "Credenciais inválidas"}, status=status.HTTP_401_UNAUTHORIZED)
+    
