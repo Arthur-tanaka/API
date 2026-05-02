@@ -55,9 +55,6 @@ def saldo(request):
         'saldo': saldo_total
     })
 
-    
-
-
 @api_view(['GET'])
 def saldo(request):
     Transaction.objects.all()
@@ -100,4 +97,3 @@ class DashboardView(APIView):
             'total_saidas': total_saidas,
             'saldo': saldo_total
         })
-    
