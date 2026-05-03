@@ -85,9 +85,15 @@ class DashboardView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         queryset = Transaction.objects.filter(user=request.user)
+        data_inicio = request.query_params.get('data_inicio')
+        data_fim = request.query_params.get('data_fim')
+        
+        # Dashboard: calcula entradas, saídas e saldo, com filtro opcional por período
+        if data_inicio and data_fim:
+            queryset = queryset.filter(data__range=[data_inicio, data_fim])
+            
         entradas = queryset.filter(tipo='entrada')
         saidas = queryset.filter(tipo='saida')
-        
         total_entradas = entradas.aggregate(Sum('valor'))['valor__sum'] or 0
         total_saidas = saidas.aggregate(Sum('valor'))['valor__sum'] or 0
         saldo_total = total_entradas - total_saidas
